@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "harness_version": "0.1.0",
+  "project": {
+    "name": "__PROJECT_NAME__",
+    "owner": null,
+    "risk": "unclassified"
+  },
+  "characteristics": {
+    "user_facing": null,
+    "has_api": null,
+    "has_database": null,
+    "schema_change": null,
+    "external_writes": null,
+    "uses_ai": null,
+    "handles_sensitive_data": null,
+    "destructive_operations": null,
+    "new_service": null,
+    "scheduled_or_async": null,
+    "payments_or_money": null,
+    "multi_tenant": null
+  },
+  "commands": {
+    "lint": null,
+    "typecheck": null,
+    "unit_test": null,
+    "integration_test": null,
+    "build": null,
+    "e2e": null,
+    "smoke": null
+  },
+  "check_timeout_seconds": 900,
+  "paths": {
+    "prd": "docs/PRD.md",
+    "architecture": "docs/ARCHITECTURE.md",
+    "runbook": "docs/RUNBOOK.md",
+    "release_plan": "docs/RELEASE.md",
+    "handoff": "docs/HANDOFF.md"
+  }
+}

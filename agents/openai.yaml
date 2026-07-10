@@ -1,0 +1,3 @@
+interface:
+  display_name: "Haruspex"
+  short_description: "Diagnose project blind spots and enforce delivery evidence"

@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "id": "__TASK_ID__",
+  "title": "__TASK_TITLE__",
+  "status": "draft",
+  "risk": "unclassified",
+  "created_at": "__CREATED_AT__",
+  "updated_at": "__CREATED_AT__",
+  "problem": {
+    "summary": "",
+    "affected_actors": [],
+    "current_behavior": "",
+    "desired_outcome": "",
+    "success_metrics": []
+  },
+  "scope": {
+    "included": [],
+    "excluded": []
+  },
+  "constraints": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "criterion": "",
+      "status": "unverified",
+      "evidence": []
+    }
+  ],
+  "assumptions": [],
+  "open_questions": [],
+  "dependencies": [],
+  "failure_modes": [],
+  "review_coverage": {
+    "core": {
+      "product": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "behavior_ux": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "data_state": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "security_privacy": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "reliability": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "operations": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "performance_cost": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "delivery_release": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      },
+      "maintainability": {
+        "status": "pending",
+        "rationale": "",
+        "evidence": []
+      }
+    },
+    "profiles": {
+      "user_facing": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "has_api": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "has_database": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "schema_change": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "external_writes": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "uses_ai": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "handles_sensitive_data": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "destructive_operations": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "new_service": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "scheduled_or_async": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "payments_or_money": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      },
+      "multi_tenant": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
+      }
+    }
+  },
+  "test_plan": {
+    "unit": [],
+    "integration": [],
+    "e2e": [],
+    "manual": [],
+    "negative_and_recovery": []
+  },
+  "required_checks": [],
+  "release_plan": {
+    "deployment_steps": [],
+    "rollback_steps": [],
+    "smoke_tests": [],
+    "monitoring": [],
+    "configuration": [],
+    "migration": [],
+    "ownership": []
+  },
+  "independent_review": {
+    "status": "pending",
+    "reviewer": null,
+    "at": null,
+    "findings": [],
+    "waiver_reason": null
+  },
+  "known_issues": [],
+  "follow_ups": [],
+  "notes": []
+}

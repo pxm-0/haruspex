@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "gates": {
+    "ready_to_build": {
+      "human_approval": true,
+      "next_stage": "build",
+      "description": "The task is explicit, diagnosed, testable, and approved."
+    },
+    "verification": {
+      "human_approval": false,
+      "next_stage": "ready_to_release",
+      "description": "Current implementation satisfies the task contract with independent evidence."
+    },
+    "ready_to_release": {
+      "human_approval": true,
+      "next_stage": "deployment",
+      "description": "Production rollout, rollback, smoke, monitoring, and ownership are prepared."
+    },
+    "close": {
+      "human_approval": false,
+      "next_stage": "closed",
+      "description": "Deployment and live behavior are verified; issues and handoff are recorded."
+    }
+  }
+}

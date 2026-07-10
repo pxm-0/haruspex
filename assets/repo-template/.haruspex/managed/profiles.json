@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "user_facing": [
+      "journeys",
+      "error states",
+      "accessibility",
+      "success signal",
+      "support behavior",
+      "live acceptance"
+    ],
+    "has_api": [
+      "contracts",
+      "validation",
+      "authn/authz",
+      "compatibility",
+      "limits",
+      "error semantics",
+      "observability"
+    ],
+    "has_database": [
+      "ownership",
+      "invariants",
+      "transactions",
+      "concurrency",
+      "indexes",
+      "backup",
+      "restore",
+      "retention"
+    ],
+    "schema_change": [
+      "forward migration",
+      "ordering",
+      "backward compatibility",
+      "backfill",
+      "validation",
+      "rollback or restore"
+    ],
+    "external_writes": [
+      "idempotency",
+      "retry classification",
+      "partial success",
+      "rate limits",
+      "credentials",
+      "reconciliation"
+    ],
+    "uses_ai": [
+      "evaluation cases",
+      "output validation",
+      "versioning",
+      "uncertainty",
+      "cost/latency",
+      "fallback",
+      "human override"
+    ],
+    "handles_sensitive_data": [
+      "classification",
+      "minimization",
+      "access",
+      "encryption",
+      "retention",
+      "deletion",
+      "redaction",
+      "incidents"
+    ],
+    "destructive_operations": [
+      "confirmation",
+      "authorization",
+      "preview",
+      "backup",
+      "audit",
+      "rollback or compensation",
+      "human approval"
+    ],
+    "new_service": [
+      "runtime config",
+      "health/readiness",
+      "supervision",
+      "resources",
+      "monitoring",
+      "ownership",
+      "rollback",
+      "recovery"
+    ],
+    "scheduled_or_async": [
+      "deduplication",
+      "poison work",
+      "retries",
+      "deadlines",
+      "cancellation",
+      "replay",
+      "stuck-work recovery"
+    ],
+    "payments_or_money": [
+      "amount/currency",
+      "idempotency",
+      "reconciliation",
+      "refunds",
+      "ledger",
+      "authorization",
+      "audit"
+    ],
+    "multi_tenant": [
+      "storage isolation",
+      "cache isolation",
+      "queue isolation",
+      "search isolation",
+      "logging isolation",
+      "admin isolation"
+    ]
+  }
+}

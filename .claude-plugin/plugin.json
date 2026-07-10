@@ -1,0 +1,8 @@
+{
+  "name": "haruspex",
+  "description": "Diagnose software-project blind spots and enforce evidence-backed delivery gates.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Haruspex"
+  }
+}

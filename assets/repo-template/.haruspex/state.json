@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "stage": "discovery",
+  "status": "active",
+  "active_task": null,
+  "gates": {
+    "ready_to_build": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    },
+    "verification": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    },
+    "ready_to_release": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    },
+    "close": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    }
+  },
+  "approvals": {
+    "ready_to_build": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": null
+    },
+    "ready_to_release": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": null
+    }
+  },
+  "deployment": {
+    "status": "not_started",
+    "environment": null,
+    "commit": null,
+    "at": null,
+    "by": null,
+    "evidence": [],
+    "note": null
+  },
+  "live_validation": {
+    "status": "not_started",
+    "at": null,
+    "by": null,
+    "evidence": [],
+    "note": null
+  },
+  "last_updated_at": null,
+  "last_updated_by": null
+}
