@@ -51,9 +51,9 @@ Every characteristic must become `true` or `false` after diagnosis. `null` means
 
 - Current stage and status.
 - Active task id.
-- Gate results and blockers.
+- Gate results and blockers, each bound to the active task and a timestamped Git snapshot.
 - Human approvals.
-- Deployment record.
+- Deployment record identifying the active task, environment, and exact approved commit when Git is present.
 - Live-validation record.
 - Last update metadata.
 
@@ -92,10 +92,10 @@ The JSON task is authoritative for gate evaluation; the Reading is optimized for
 
 Automated check evidence lives under `.haruspex/evidence/checks/` and includes:
 
-- Check name and command.
+- Check name, command, and owning task id.
 - Start and completion times.
 - Exit code and status.
-- Repository path, Git branch, commit, and dirty-tree flag.
+- Repository path, Git branch, commit, dirty-tree flag, worktree fingerprint, and snapshot time.
 - Log path.
 
 Manual evidence can be a JSON record or a link in an acceptance criterion. It must identify who observed what, where, when, and by what procedure.

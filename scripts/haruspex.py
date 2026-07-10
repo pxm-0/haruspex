@@ -141,6 +141,7 @@ def git_info(repo: Path) -> dict[str, Any]:
             "commit": None,
             "dirty": None,
             "worktree_fingerprint": None,
+            "checked_at": now_utc(),
         }
 
     _, commit = run_quiet(["git", "rev-parse", "HEAD"], repo)
@@ -148,7 +149,7 @@ def git_info(repo: Path) -> dict[str, Any]:
     # Haruspex state and evidence are control-plane metadata. Exclude them from
     # the worktree fingerprint so recording a check does not invalidate itself.
     status_command = [
-        "git", "status", "--porcelain=v1", "-z", "--", ".",
+        "git", "status", "--porcelain=v1", "-z", "--untracked-files=all", "--", ".",
         ":(exclude).haruspex/**",
     ]
     _, status = run_quiet(status_command, repo)
@@ -184,6 +185,7 @@ def git_info(repo: Path) -> dict[str, Any]:
         "commit": commit or None,
         "dirty": dirty,
         "worktree_fingerprint": digest.hexdigest(),
+        "checked_at": now_utc(),
     }
 
 
@@ -542,6 +544,8 @@ def reset_gate_entry(entry: dict[str, Any]) -> None:
     entry["checked_at"] = None
     entry["blockers"] = []
     entry["evidence"] = []
+    entry["task"] = None
+    entry["git"] = None
 
 
 def reset_state_for_task(state: dict[str, Any], task_id: str) -> None:
@@ -558,6 +562,7 @@ def reset_state_for_task(state: dict[str, Any], task_id: str) -> None:
         "status": "not_started",
         "environment": None,
         "commit": None,
+        "task": None,
         "at": None,
         "by": None,
         "evidence": [],
@@ -676,7 +681,7 @@ def normalize_gate(name: str) -> str:
         raise HaruspexError(f"Unknown gate: {name}") from exc
 
 
-def latest_check_evidence(repo: Path) -> dict[str, dict[str, Any]]:
+def latest_check_evidence(repo: Path, task_id: str) -> dict[str, dict[str, Any]]:
     evidence_dir = repo / ".haruspex" / "evidence" / "checks"
     latest: dict[str, dict[str, Any]] = {}
     if not evidence_dir.exists():
@@ -687,7 +692,7 @@ def latest_check_evidence(repo: Path) -> dict[str, dict[str, Any]]:
         except HaruspexError:
             continue
         name = item.get("check")
-        if not isinstance(name, str):
+        if not isinstance(name, str) or item.get("task") != task_id:
             continue
         item["_path"] = str(path.relative_to(repo))
         prior = latest.get(name)
@@ -696,7 +701,11 @@ def latest_check_evidence(repo: Path) -> dict[str, dict[str, Any]]:
     return latest
 
 
-def check_evidence_current(item: dict[str, Any], current_git: dict[str, Any]) -> tuple[bool, str | None]:
+def check_evidence_current(
+    item: dict[str, Any], current_git: dict[str, Any], task_id: str
+) -> tuple[bool, str | None]:
+    if item.get("task") != task_id:
+        return False, f"evidence belongs to task {item.get('task')!r}, not active task {task_id}"
     if item.get("status") != "passed":
         return False, f"latest evidence status is {item.get('status')!r}"
     after = item.get("git_after", {})
@@ -706,6 +715,24 @@ def check_evidence_current(item: dict[str, Any], current_git: dict[str, Any]) ->
         if after.get("worktree_fingerprint") != current_git.get("worktree_fingerprint"):
             return False, "working tree changed after evidence was generated"
     return True, None
+
+
+def gate_snapshot_issue(state: dict[str, Any], gate: str) -> str | None:
+    entry = state.get("gates", {}).get(gate, {})
+    if entry.get("status") != "passed":
+        return f"{gate} gate has not passed."
+    if not nonempty_text(entry.get("task")) or not isinstance(entry.get("git"), dict):
+        return (
+            f"{gate} was recorded without a task and Git snapshot. "
+            "Rerun the gate with the current Haruspex version."
+        )
+    active_task = state.get("active_task")
+    if entry.get("task") != active_task:
+        return (
+            f"{gate} passed for task {entry.get('task')}, but the active task is {active_task}. "
+            "Rerun the gate for the active task."
+        )
+    return None
 
 
 def evaluate_ready_to_build(repo: Path, project: dict[str, Any], state: dict[str, Any], task: dict[str, Any]) -> GateResult:
@@ -853,8 +880,9 @@ def evaluate_verification(repo: Path, project: dict[str, Any], state: dict[str, 
     blockers: list[str] = []
     warnings: list[str] = []
     ready_result = evaluate_ready_to_build(repo, project, state, task)
-    if state.get("gates", {}).get("ready_to_build", {}).get("status") != "passed":
-        blockers.append("ready_to_build gate has not passed.")
+    ready_snapshot_issue = gate_snapshot_issue(state, "ready_to_build")
+    if ready_snapshot_issue:
+        blockers.append(ready_snapshot_issue)
     if not ready_result.passed:
         blockers.extend(f"Ready-to-build contract is no longer valid: {item}" for item in ready_result.blockers)
 
@@ -889,14 +917,18 @@ def evaluate_verification(repo: Path, project: dict[str, Any], state: dict[str, 
         else:
             blockers.append(f"Criterion {criterion.get('id', '<unknown>')} is {status or 'unverified'}.")
 
-    latest = latest_check_evidence(repo)
+    active_task_id = state.get("active_task")
+    if not nonempty_text(active_task_id):
+        blockers.append("No active task is available for automated evidence evaluation.")
+        active_task_id = "<missing>"
+    latest = latest_check_evidence(repo, active_task_id)
     current_git = git_info(repo)
     for check in task.get("required_checks", []):
         item = latest.get(check)
         if not item:
-            blockers.append(f"Required check '{check}' has no evidence.")
+            blockers.append(f"Required check '{check}' has no evidence for active task {active_task_id}.")
             continue
-        current, reason = check_evidence_current(item, current_git)
+        current, reason = check_evidence_current(item, current_git, active_task_id)
         if not current:
             blockers.append(f"Required check '{check}' is not current: {reason}.")
 
@@ -923,8 +955,9 @@ def evaluate_ready_to_release(repo: Path, project: dict[str, Any], state: dict[s
     blockers: list[str] = []
     warnings: list[str] = []
     verification_result = evaluate_verification(repo, project, state, task)
-    if state.get("gates", {}).get("verification", {}).get("status") != "passed":
-        blockers.append("verification gate has not passed.")
+    verification_snapshot_issue = gate_snapshot_issue(state, "verification")
+    if verification_snapshot_issue:
+        blockers.append(verification_snapshot_issue)
     if not verification_result.passed:
         blockers.extend(f"Verification is no longer valid: {item}" for item in verification_result.blockers)
     if task.get("status") not in {"ready_for_release", "deployed", "completed"}:
@@ -954,8 +987,9 @@ def evaluate_close(repo: Path, project: dict[str, Any], state: dict[str, Any], t
     # Closeout artifacts are commonly written after deployment, so do not bind
     # this gate to the current HEAD. Trust the recorded release gate and verify
     # the deployed artifact through deployment and live evidence instead.
-    if state.get("gates", {}).get("ready_to_release", {}).get("status") != "passed":
-        blockers.append("ready_to_release gate has not passed.")
+    release_snapshot_issue = gate_snapshot_issue(state, "ready_to_release")
+    if release_snapshot_issue:
+        blockers.append(release_snapshot_issue)
 
     deployment = state.get("deployment", {})
     if deployment.get("status") != "succeeded":
@@ -1021,6 +1055,8 @@ def record_gate(repo: Path, result: GateResult) -> None:
     entry["checked_at"] = now_utc()
     entry["blockers"] = result.blockers
     entry["evidence"] = entry.get("evidence", [])
+    entry["task"] = state.get("active_task")
+    entry["git"] = git_info(repo)
     if result.passed:
         state["stage"] = GATE_NEXT_STAGE[result.gate]
         state["status"] = "closed" if result.gate == "close" else "active"
@@ -1189,15 +1225,42 @@ def command_verify(args: argparse.Namespace) -> int:
 def command_record_deployment(args: argparse.Namespace) -> int:
     repo = resolve_repo(args.path)
     _, state = load_project_state(repo)
-    if state.get("gates", {}).get("ready_to_release", {}).get("status") != "passed":
-        raise HaruspexError("Cannot record deployment before the ready_to_release gate passes.")
+    release_issue = gate_snapshot_issue(state, "ready_to_release")
+    if release_issue:
+        raise HaruspexError(release_issue)
+    release_gate = state["gates"]["ready_to_release"]
+    release_git = release_gate["git"]
     git = git_info(repo)
+    deployment_commit = args.commit or git.get("commit")
+    if release_git.get("is_git"):
+        release_commit = release_git.get("commit")
+        if not nonempty_text(release_commit):
+            raise HaruspexError(
+                "ready_to_release was recorded without a Git commit. Rerun the gate with the current Haruspex version."
+            )
+        if not git.get("is_git"):
+            raise HaruspexError("The current repository is not the Git worktree that passed ready_to_release.")
+        if not nonempty_text(deployment_commit):
+            raise HaruspexError("A Git deployment must identify the deployed commit.")
+        if deployment_commit != release_commit:
+            raise HaruspexError(
+                f"Deployment commit {deployment_commit} does not match ready_to_release commit {release_commit}."
+            )
+        if git.get("commit") != release_commit:
+            raise HaruspexError(
+                f"Current Git commit {git.get('commit')} does not match ready_to_release commit {release_commit}."
+            )
+        if git.get("worktree_fingerprint") != release_git.get("worktree_fingerprint"):
+            raise HaruspexError(
+                "The working tree changed after ready_to_release passed. Rerun verification and ready_to_release."
+            )
     evidence = list(args.evidence or [])
     deployment = state.setdefault("deployment", {})
     deployment.update({
         "status": args.status,
         "environment": args.environment,
-        "commit": args.commit or git.get("commit"),
+        "commit": deployment_commit,
+        "task": state.get("active_task"),
         "at": now_utc(),
         "by": args.by,
         "evidence": evidence,
