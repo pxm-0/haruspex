@@ -721,7 +721,14 @@ def gate_snapshot_issue(state: dict[str, Any], gate: str) -> str | None:
     entry = state.get("gates", {}).get(gate, {})
     if entry.get("status") != "passed":
         return f"{gate} gate has not passed."
-    if not nonempty_text(entry.get("task")) or not isinstance(entry.get("git"), dict):
+    git_snapshot = entry.get("git")
+    required_git_fields = {"is_git", "branch", "commit", "dirty", "worktree_fingerprint", "checked_at"}
+    if (
+        not nonempty_text(entry.get("task"))
+        or not isinstance(git_snapshot, dict)
+        or not required_git_fields.issubset(git_snapshot)
+        or not isinstance(git_snapshot.get("is_git"), bool)
+    ):
         return (
             f"{gate} was recorded without a task and Git snapshot. "
             "Rerun the gate with the current Haruspex version."
@@ -1232,6 +1239,8 @@ def command_record_deployment(args: argparse.Namespace) -> int:
     release_git = release_gate["git"]
     git = git_info(repo)
     deployment_commit = args.commit or git.get("commit")
+    if release_git.get("is_git") != git.get("is_git"):
+        raise HaruspexError("The repository Git state changed after ready_to_release passed. Rerun the gate.")
     if release_git.get("is_git"):
         release_commit = release_git.get("commit")
         if not nonempty_text(release_commit):
