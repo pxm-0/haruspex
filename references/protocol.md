@@ -97,13 +97,17 @@ Evidence must be:
 
 - **Specific:** name the criterion, check, command, environment, or observation.
 - **Reproducible:** provide a command, artifact path, or clear manual procedure.
-- **Current:** automated evidence must match the current Git commit; dirty-tree status is recorded.
+- **Current:** automated evidence must belong to the active task and match the current Git commit and worktree fingerprint.
 - **Durable:** store it under `.haruspex/evidence/` or link a durable external record.
 - **Honest:** preserve failures and superseded evidence rather than overwriting history.
 
 Evidence types include automated-check JSON, logs, screenshots, test reports, review notes, deployment records, and production observations.
 
 A statement such as "tests pass" is not sufficient without a recorded command result. A successful deployment is not sufficient evidence that the user path works.
+
+Every recorded gate result is bound to the active task and a Git snapshot, including the branch, commit, dirty state, worktree fingerprint, and check time. Non-Git repositories record an explicit non-Git snapshot. Later gates reject stale, cross-task, or legacy gate records that lack this binding.
+
+A deployment in a Git repository must record the exact commit approved by `ready_to_release`, and the current worktree must still match that gate snapshot. Supplying an explicit commit does not bypass this check. Non-Git repositories enforce task binding but do not fabricate or compare commits.
 
 ## 5. Approval rules
 

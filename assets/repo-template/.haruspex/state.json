@@ -8,25 +8,33 @@
       "status": "pending",
       "checked_at": null,
       "blockers": [],
-      "evidence": []
+      "evidence": [],
+      "task": null,
+      "git": null
     },
     "verification": {
       "status": "pending",
       "checked_at": null,
       "blockers": [],
-      "evidence": []
+      "evidence": [],
+      "task": null,
+      "git": null
     },
     "ready_to_release": {
       "status": "pending",
       "checked_at": null,
       "blockers": [],
-      "evidence": []
+      "evidence": [],
+      "task": null,
+      "git": null
     },
     "close": {
       "status": "pending",
       "checked_at": null,
       "blockers": [],
-      "evidence": []
+      "evidence": [],
+      "task": null,
+      "git": null
     }
   },
   "approvals": {
@@ -47,6 +55,7 @@
     "status": "not_started",
     "environment": null,
     "commit": null,
+    "task": null,
     "at": null,
     "by": null,
     "evidence": [],
