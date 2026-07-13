@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "haruspex",
+  "description": "Diagnose software-project blind spots and enforce evidence-backed delivery gates.",
+  "owner": {
+    "name": "Dustin A",
+    "url": "https://github.com/pxm-0"
+  },
+  "plugins": [
+    {
+      "name": "haruspex",
+      "description": "Diagnose software-project blind spots and enforce evidence-backed delivery gates.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
