@@ -50,7 +50,7 @@
       "criterion": "Repository-local provenance controls are initialized and structurally valid.",
       "status": "passed",
       "evidence": [
-        "python3 .haruspex/bin/haruspex.py doctor ."
+        "check:unit_test"
       ]
     },
     {
@@ -68,8 +68,8 @@
       "criterion": "A private ledger and hash-verified full-history archive exist under pxm-0 control.",
       "status": "passed",
       "evidence": [
-        "pxm-0/haruspex-ip-ledger@fe47dbcad49586ad34d4c2b211ddb4c2231f3d21",
-        "bundle sha256 9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd"
+        "https://github.com/pxm-0/haruspex-ip-ledger/commit/fe47dbcad49586ad34d4c2b211ddb4c2231f3d21",
+        "external:bundle-sha256:9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd"
       ]
     },
     {
@@ -77,8 +77,8 @@
       "criterion": "Automated checks reject missing evidence hashes, unsupported certainty, and sensitive paths.",
       "status": "passed",
       "evidence": [
-        "haruspex-ip-ledger/scripts/validate_inventory.py --self-test",
-        "haruspex-ip-ledger/archives/SHA256SUMS"
+        "https://github.com/pxm-0/haruspex-ip-ledger/blob/fe47dbcad49586ad34d4c2b211ddb4c2231f3d21/scripts/validate_inventory.py",
+        "external:private-ledger-validator-self-test-and-SHA256SUMS-passed"
       ]
     }
   ],
