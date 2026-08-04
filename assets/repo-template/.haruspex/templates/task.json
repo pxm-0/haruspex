@@ -138,6 +138,11 @@
         "status": "not_activated",
         "rationale": "",
         "evidence": []
+      },
+      "ip_provenance_sensitive": {
+        "status": "not_activated",
+        "rationale": "",
+        "evidence": []
       }
     }
   },

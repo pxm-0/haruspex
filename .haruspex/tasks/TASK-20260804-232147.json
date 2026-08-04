@@ -2,13 +2,17 @@
   "schema_version": 1,
   "id": "TASK-20260804-232147",
   "title": "Establish Haruspex IP provenance inventory",
-  "status": "ready",
+  "status": "in_progress",
   "risk": "high",
   "created_at": "2026-08-04T23:21:47Z",
-  "updated_at": "2026-08-04T23:21:47Z",
+  "updated_at": "2026-08-04T23:26:10Z",
   "problem": {
     "summary": "Haruspex has public source history but no durable chain-of-title inventory or publication gate.",
-    "affected_actors": ["creator", "future counsel", "future licensees or buyers"],
+    "affected_actors": [
+      "creator",
+      "future counsel",
+      "future licensees or buyers"
+    ],
     "current_behavior": "Repository history records publication but omits private creation evidence, ownership unknowns, and a pre-publication provenance review.",
     "desired_outcome": "Preserve a verifiable private evidence inventory while publishing only substantiated, non-sensitive provenance metadata.",
     "success_metrics": [
@@ -116,48 +120,193 @@
   ],
   "review_coverage": {
     "core": {
-      "product": {"status": "complete", "rationale": "Outcome is evidence preservation, not a title determination.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "behavior_ux": {"status": "complete", "rationale": "Primary paths are inventory creation, validation failure, and recovery from missing evidence.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "data_state": {"status": "complete", "rationale": "Known, unknown, evidence, and hash states are explicit and append-only.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "security_privacy": {"status": "complete", "rationale": "Public/private separation and a sensitive-content denylist are required.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "reliability": {"status": "complete", "rationale": "Archive verification and reproducible hashes cover corruption and drift.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "operations": {"status": "complete", "rationale": "The ledger includes review dates, owners, and follow-ups.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "performance_cost": {"status": "complete", "rationale": "Small repository and standard-library validation have negligible cost.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "delivery_release": {"status": "complete", "rationale": "Draft PR, issues, private ledger, archive, and pre-publication checks define delivery.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "maintainability": {"status": "complete", "rationale": "Flat YAML records and one validator avoid a new service or dependency.", "evidence": ["docs/IP_PROVENANCE.md"]}
+      "product": {
+        "status": "complete",
+        "rationale": "Outcome is evidence preservation, not a title determination.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "behavior_ux": {
+        "status": "complete",
+        "rationale": "Primary paths are inventory creation, validation failure, and recovery from missing evidence.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "data_state": {
+        "status": "complete",
+        "rationale": "Known, unknown, evidence, and hash states are explicit and append-only.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "security_privacy": {
+        "status": "complete",
+        "rationale": "Public/private separation and a sensitive-content denylist are required.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "reliability": {
+        "status": "complete",
+        "rationale": "Archive verification and reproducible hashes cover corruption and drift.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "operations": {
+        "status": "complete",
+        "rationale": "The ledger includes review dates, owners, and follow-ups.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "performance_cost": {
+        "status": "complete",
+        "rationale": "Small repository and standard-library validation have negligible cost.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "delivery_release": {
+        "status": "complete",
+        "rationale": "Draft PR, issues, private ledger, archive, and pre-publication checks define delivery.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "maintainability": {
+        "status": "complete",
+        "rationale": "Flat YAML records and one validator avoid a new service or dependency.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      }
     },
     "profiles": {
-      "external_writes": {"status": "complete", "rationale": "GitHub writes are scoped to pxm-0 and verified before mutation.", "evidence": ["gh auth status --active"]},
-      "uses_ai": {"status": "complete", "rationale": "AI assistance is recorded as unknown in detail and never treated as human authorship proof.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "handles_sensitive_data": {"status": "complete", "rationale": "Underlying sensitive documents are excluded from Git; only hashes and references are allowed.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "ip_provenance_sensitive": {"status": "complete", "rationale": "Publication requires creator, contributor, third-party, AI, confidentiality, licensing, and evidence review.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "user_facing": {"status": "not_activated", "rationale": "No runtime user interface is changed.", "evidence": []},
-      "has_api": {"status": "not_activated", "rationale": "No API is added.", "evidence": []},
-      "has_database": {"status": "not_activated", "rationale": "The inventory is file-backed.", "evidence": []},
-      "schema_change": {"status": "not_activated", "rationale": "No production schema exists.", "evidence": []},
-      "destructive_operations": {"status": "not_activated", "rationale": "History and evidence deletion are excluded.", "evidence": []},
-      "new_service": {"status": "not_activated", "rationale": "No service is added.", "evidence": []},
-      "scheduled_or_async": {"status": "not_activated", "rationale": "No scheduled or asynchronous runtime is added.", "evidence": []},
-      "payments_or_money": {"status": "not_activated", "rationale": "No payments are involved.", "evidence": []},
-      "multi_tenant": {"status": "not_activated", "rationale": "No multi-tenant runtime is involved.", "evidence": []}
+      "external_writes": {
+        "status": "complete",
+        "rationale": "GitHub writes are scoped to pxm-0 and verified before mutation.",
+        "evidence": [
+          "gh auth status --active"
+        ]
+      },
+      "uses_ai": {
+        "status": "complete",
+        "rationale": "AI assistance is recorded as unknown in detail and never treated as human authorship proof.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "handles_sensitive_data": {
+        "status": "complete",
+        "rationale": "Underlying sensitive documents are excluded from Git; only hashes and references are allowed.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "ip_provenance_sensitive": {
+        "status": "complete",
+        "rationale": "Publication requires creator, contributor, third-party, AI, confidentiality, licensing, and evidence review.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "user_facing": {
+        "status": "not_activated",
+        "rationale": "No runtime user interface is changed.",
+        "evidence": []
+      },
+      "has_api": {
+        "status": "not_activated",
+        "rationale": "No API is added.",
+        "evidence": []
+      },
+      "has_database": {
+        "status": "not_activated",
+        "rationale": "The inventory is file-backed.",
+        "evidence": []
+      },
+      "schema_change": {
+        "status": "not_activated",
+        "rationale": "No production schema exists.",
+        "evidence": []
+      },
+      "destructive_operations": {
+        "status": "not_activated",
+        "rationale": "History and evidence deletion are excluded.",
+        "evidence": []
+      },
+      "new_service": {
+        "status": "not_activated",
+        "rationale": "No service is added.",
+        "evidence": []
+      },
+      "scheduled_or_async": {
+        "status": "not_activated",
+        "rationale": "No scheduled or asynchronous runtime is added.",
+        "evidence": []
+      },
+      "payments_or_money": {
+        "status": "not_activated",
+        "rationale": "No payments are involved.",
+        "evidence": []
+      },
+      "multi_tenant": {
+        "status": "not_activated",
+        "rationale": "No multi-tenant runtime is involved.",
+        "evidence": []
+      }
     }
   },
   "test_plan": {
-    "unit": ["Run the existing Haruspex self-test."],
-    "integration": ["Run evidence-integrity regression tests.", "Validate private ledger records and archive hashes."],
-    "e2e": ["Clone the private ledger and verify the referenced Haruspex bundle."],
-    "manual": ["Confirm public files contain no contract text, credentials, privileged communications, or unsupported ownership claim."],
-    "negative_and_recovery": ["Reject missing hashes, invalid status values, and forbidden sensitive paths.", "Keep legal conclusions unknown when source evidence is absent."]
+    "unit": [
+      "Run the existing Haruspex self-test."
+    ],
+    "integration": [
+      "Run evidence-integrity regression tests.",
+      "Validate private ledger records and archive hashes."
+    ],
+    "e2e": [
+      "Clone the private ledger and verify the referenced Haruspex bundle."
+    ],
+    "manual": [
+      "Confirm public files contain no contract text, credentials, privileged communications, or unsupported ownership claim."
+    ],
+    "negative_and_recovery": [
+      "Reject missing hashes, invalid status values, and forbidden sensitive paths.",
+      "Keep legal conclusions unknown when source evidence is absent."
+    ]
   },
-  "required_checks": ["unit_test", "integration_test", "build"],
+  "required_checks": [
+    "unit_test",
+    "integration_test",
+    "build"
+  ],
   "release_plan": {
-    "deployment_steps": ["Push feature branch and private ledger branch.", "Keep public PR in draft until checks and human review pass."],
-    "rollback_steps": ["Close the draft PR without merge; retain private evidence and Git history."],
-    "smoke_tests": ["Run Haruspex version and ledger validator."],
-    "monitoring": ["Review ledger after material contribution, disclosure, assignment, or release."],
-    "configuration": ["GitHub identity must be pxm-0."],
-    "migration": ["None."],
-    "ownership": ["pxm-0 maintains records; counsel determines legal conclusions."]
+    "deployment_steps": [
+      "Push feature branch and private ledger branch.",
+      "Keep public PR in draft until checks and human review pass."
+    ],
+    "rollback_steps": [
+      "Close the draft PR without merge; retain private evidence and Git history."
+    ],
+    "smoke_tests": [
+      "Run Haruspex version and ledger validator."
+    ],
+    "monitoring": [
+      "Review ledger after material contribution, disclosure, assignment, or release."
+    ],
+    "configuration": [
+      "GitHub identity must be pxm-0."
+    ],
+    "migration": [
+      "None."
+    ],
+    "ownership": [
+      "pxm-0 maintains records; counsel determines legal conclusions."
+    ]
   },
   "independent_review": {
     "status": "pending",

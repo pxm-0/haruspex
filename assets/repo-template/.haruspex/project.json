@@ -18,7 +18,8 @@
     "new_service": null,
     "scheduled_or_async": null,
     "payments_or_money": null,
-    "multi_tenant": null
+    "multi_tenant": null,
+    "ip_provenance_sensitive": null
   },
   "commands": {
     "lint": null,

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "stage": "specification",
+  "stage": "build",
   "status": "active",
   "active_task": "TASK-20260804-232147",
   "gates": {
     "ready_to_build": {
-      "status": "pending",
-      "checked_at": null,
+      "status": "passed",
+      "checked_at": "2026-08-04T23:26:10Z",
       "blockers": [],
       "evidence": []
     },
@@ -31,10 +31,10 @@
   },
   "approvals": {
     "ready_to_build": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": null
+      "status": "approved",
+      "by": "user",
+      "at": "2026-08-04T23:26:06Z",
+      "note": "User explicitly approved ready-to-build in Codex chat on 2026-08-05: approve rtb"
     },
     "ready_to_release": {
       "status": "pending",
@@ -59,6 +59,6 @@
     "evidence": [],
     "note": null
   },
-  "last_updated_at": "2026-08-04T23:21:47Z",
+  "last_updated_at": "2026-08-04T23:26:10Z",
   "last_updated_by": "haruspex"
 }

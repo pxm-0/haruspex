@@ -107,6 +107,18 @@
       "search isolation",
       "logging isolation",
       "admin isolation"
+    ],
+    "ip_provenance_sensitive": [
+      "creator and claimed owner",
+      "employment and assignment boundary",
+      "contributors and written assignments",
+      "third-party material and licenses",
+      "AI assistance and human contribution",
+      "confidential-information review",
+      "publication and disclosure history",
+      "release commit and artifact hashes",
+      "licensing decision",
+      "explicit ownership risks"
     ]
   }
 }
