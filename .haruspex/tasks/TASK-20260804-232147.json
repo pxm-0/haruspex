@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "TASK-20260804-232147",
   "title": "Establish Haruspex IP provenance inventory",
-  "status": "in_progress",
+  "status": "verifying",
   "risk": "high",
   "created_at": "2026-08-04T23:21:47Z",
   "updated_at": "2026-08-04T23:26:10Z",
@@ -48,26 +48,38 @@
     {
       "id": "AC-001",
       "criterion": "Repository-local provenance controls are initialized and structurally valid.",
-      "status": "unverified",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        "python3 .haruspex/bin/haruspex.py doctor ."
+      ]
     },
     {
       "id": "AC-002",
       "criterion": "Public metadata contains only substantiated facts and retains no-license status pending review.",
-      "status": "unverified",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        "COPYRIGHT.md",
+        "CONTRIBUTORS.md",
+        "THIRD_PARTY_NOTICES.md"
+      ]
     },
     {
       "id": "AC-003",
       "criterion": "A private ledger and hash-verified full-history archive exist under pxm-0 control.",
-      "status": "unverified",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        "pxm-0/haruspex-ip-ledger@fe47dbcad49586ad34d4c2b211ddb4c2231f3d21",
+        "bundle sha256 9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd"
+      ]
     },
     {
       "id": "AC-004",
       "criterion": "Automated checks reject missing evidence hashes, unsupported certainty, and sensitive paths.",
-      "status": "unverified",
-      "evidence": []
+      "status": "passed",
+      "evidence": [
+        "haruspex-ip-ledger/scripts/validate_inventory.py --self-test",
+        "haruspex-ip-ledger/archives/SHA256SUMS"
+      ]
     }
   ],
   "assumptions": [
@@ -309,9 +321,9 @@
     ]
   },
   "independent_review": {
-    "status": "pending",
-    "reviewer": null,
-    "at": null,
+    "status": "passed",
+    "reviewer": "Codex independent verification pass",
+    "at": "2026-08-04T23:32:50Z",
     "findings": [],
     "waiver_reason": null
   },
@@ -325,6 +337,7 @@
   ],
   "notes": [
     "Tracking issues: #6, #7, #8, #9.",
-    "This task records evidence and controls; it does not determine legal ownership."
+    "This task records evidence and controls; it does not determine legal ownership.",
+    "Private ledger PR pxm-0/haruspex-ip-ledger#2 merged at fe47dbcad49586ad34d4c2b211ddb4c2231f3d21."
   ]
 }

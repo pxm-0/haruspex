@@ -6,10 +6,10 @@ Preserve a verifiable Haruspex creation and publication inventory without exposi
 
 ## Plan
 
-- [ ] #7 Bootstrap repository-local provenance controls.
-- [ ] #6 Add public-safe copyright and contribution metadata.
-- [ ] #8 Create a private IP ledger and full-history preservation archive.
-- [ ] #9 Validate the inventory and archive hashes.
+- [x] #7 Bootstrap repository-local provenance controls.
+- [x] #6 Add public-safe copyright and contribution metadata.
+- [x] #8 Create a private IP ledger and full-history preservation archive.
+- [x] #9 Validate the inventory and archive hashes.
 
 ## Public/private boundary
 
@@ -35,3 +35,11 @@ Git history is publication evidence, not conclusive proof of human authorship or
 ## Release condition
 
 Keep the pull request in draft until automated checks pass, the private ledger and archive exist, and a human confirms the public/private boundary. Legal ownership remains a separate counsel decision.
+
+## Preserved evidence
+
+- Private ledger: `pxm-0/haruspex-ip-ledger` at merge commit `fe47dbcad49586ad34d4c2b211ddb4c2231f3d21`.
+- Complete Git bundle SHA-256: `9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd`.
+- Repository metadata snapshot SHA-256: `f85f69984052ccd812e9e21480b4a5164a7c3985907447f7119a1eb5d75d5a61`.
+
+The private inventory deliberately leaves legal ownership, employment overlap, external contributions, AI contribution detail, copied material, registrations, and the second independent backup unresolved.

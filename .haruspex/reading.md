@@ -1,6 +1,6 @@
 # HARUSPEX — THE READING
 
-**Stage:** IP provenance inventory specification  
+**Stage:** IP provenance inventory verification
 **Recommendation:** PROCEED WITH CONDITIONS
 
 ## Outcome
@@ -22,11 +22,12 @@ Create a private, evidence-linked inventory and archive while adding only public
 
 ## Gate blockers
 
-- Explicit human approval of the ready-to-build gate.
+- Legal ownership remains unresolved pending contract, assigned-duty, contributor, AI-assistance, and copied-material review. This blocks a clean-title representation, not preservation work.
+- A second independently controlled encrypted backup remains a human follow-up.
 
 ## Next actions
 
-1. Open the draft PR with issues #6–#9.
-2. Obtain ready-to-build approval.
-3. Implement public metadata, private ledger, archive, and deterministic validation.
-4. Verify evidence and leave legal conclusions unresolved for counsel.
+1. Run commit-bound public checks and verification.
+2. Confirm CI on draft PR #10.
+3. Merge the public controls without changing the unresolved legal conclusions.
+4. Review private contracts and evidence with counsel and create the second encrypted backup.
