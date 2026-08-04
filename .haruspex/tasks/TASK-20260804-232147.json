@@ -85,6 +85,7 @@
       "validation": "Record the fields as unknown with an owner and follow-up rather than asserting a favorable answer.",
       "owner": "pxm-0 and counsel",
       "status": "accepted_risk",
+      "resolution": "For this implementation, unavailable legal facts are recorded as unknown and explicitly excluded from ownership claims; counsel review remains a follow-up.",
       "blocking": false
     }
   ],
@@ -115,21 +116,21 @@
   ],
   "review_coverage": {
     "core": {
-      "product": {"status": "completed", "rationale": "Outcome is evidence preservation, not a title determination.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "behavior_ux": {"status": "completed", "rationale": "Primary paths are inventory creation, validation failure, and recovery from missing evidence.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "data_state": {"status": "completed", "rationale": "Known, unknown, evidence, and hash states are explicit and append-only.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "security_privacy": {"status": "completed", "rationale": "Public/private separation and a sensitive-content denylist are required.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "reliability": {"status": "completed", "rationale": "Archive verification and reproducible hashes cover corruption and drift.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "operations": {"status": "completed", "rationale": "The ledger includes review dates, owners, and follow-ups.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "performance_cost": {"status": "completed", "rationale": "Small repository and standard-library validation have negligible cost.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "delivery_release": {"status": "completed", "rationale": "Draft PR, issues, private ledger, archive, and pre-publication checks define delivery.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "maintainability": {"status": "completed", "rationale": "Flat YAML records and one validator avoid a new service or dependency.", "evidence": ["docs/IP_PROVENANCE.md"]}
+      "product": {"status": "complete", "rationale": "Outcome is evidence preservation, not a title determination.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "behavior_ux": {"status": "complete", "rationale": "Primary paths are inventory creation, validation failure, and recovery from missing evidence.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "data_state": {"status": "complete", "rationale": "Known, unknown, evidence, and hash states are explicit and append-only.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "security_privacy": {"status": "complete", "rationale": "Public/private separation and a sensitive-content denylist are required.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "reliability": {"status": "complete", "rationale": "Archive verification and reproducible hashes cover corruption and drift.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "operations": {"status": "complete", "rationale": "The ledger includes review dates, owners, and follow-ups.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "performance_cost": {"status": "complete", "rationale": "Small repository and standard-library validation have negligible cost.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "delivery_release": {"status": "complete", "rationale": "Draft PR, issues, private ledger, archive, and pre-publication checks define delivery.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "maintainability": {"status": "complete", "rationale": "Flat YAML records and one validator avoid a new service or dependency.", "evidence": ["docs/IP_PROVENANCE.md"]}
     },
     "profiles": {
-      "external_writes": {"status": "completed", "rationale": "GitHub writes are scoped to pxm-0 and verified before mutation.", "evidence": ["gh auth status --active"]},
-      "uses_ai": {"status": "completed", "rationale": "AI assistance is recorded as unknown in detail and never treated as human authorship proof.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "handles_sensitive_data": {"status": "completed", "rationale": "Underlying sensitive documents are excluded from Git; only hashes and references are allowed.", "evidence": ["docs/IP_PROVENANCE.md"]},
-      "ip_provenance_sensitive": {"status": "completed", "rationale": "Publication requires creator, contributor, third-party, AI, confidentiality, licensing, and evidence review.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "external_writes": {"status": "complete", "rationale": "GitHub writes are scoped to pxm-0 and verified before mutation.", "evidence": ["gh auth status --active"]},
+      "uses_ai": {"status": "complete", "rationale": "AI assistance is recorded as unknown in detail and never treated as human authorship proof.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "handles_sensitive_data": {"status": "complete", "rationale": "Underlying sensitive documents are excluded from Git; only hashes and references are allowed.", "evidence": ["docs/IP_PROVENANCE.md"]},
+      "ip_provenance_sensitive": {"status": "complete", "rationale": "Publication requires creator, contributor, third-party, AI, confidentiality, licensing, and evidence review.", "evidence": ["docs/IP_PROVENANCE.md"]},
       "user_facing": {"status": "not_activated", "rationale": "No runtime user interface is changed.", "evidence": []},
       "has_api": {"status": "not_activated", "rationale": "No API is added.", "evidence": []},
       "has_database": {"status": "not_activated", "rationale": "The inventory is file-backed.", "evidence": []},
