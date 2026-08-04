@@ -1,0 +1,8 @@
+{
+  "name": "haruspex",
+  "version": "0.1.0",
+  "schema_version": 1,
+  "installed_at": "2026-08-04T23:21:36Z",
+  "cli": ".haruspex/bin/haruspex.py",
+  "cli_sha256": "30ff1732b7772a0cf9fca59b09e90d12440046ffed3386b003592c1827d8a2d3"
+}

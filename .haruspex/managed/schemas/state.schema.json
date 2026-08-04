@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://haruspex.local/schemas/state.schema.json",
+  "title": "Haruspex state",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "stage",
+    "status",
+    "gates",
+    "approvals",
+    "deployment",
+    "live_validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "stage": {
+      "enum": [
+        "discovery",
+        "specification",
+        "ready_to_build",
+        "build",
+        "verification",
+        "ready_to_release",
+        "deployment",
+        "live_validation",
+        "closed"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "blocked",
+        "closed"
+      ]
+    },
+    "active_task": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gates": {
+      "type": "object"
+    },
+    "approvals": {
+      "type": "object"
+    },
+    "deployment": {
+      "type": "object"
+    },
+    "live_validation": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

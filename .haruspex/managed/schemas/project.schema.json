@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://haruspex.local/schemas/project.schema.json",
+  "title": "Haruspex project configuration",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "harness_version",
+    "project",
+    "characteristics",
+    "commands",
+    "paths"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "harness_version": {
+      "type": "string"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "risk"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "risk": {
+          "enum": [
+            "unclassified",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "characteristics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "check_timeout_seconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}
