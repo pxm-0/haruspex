@@ -38,7 +38,7 @@ Keep the pull request in draft until automated checks pass, the private ledger a
 
 ## Preserved evidence
 
-- Private ledger: `pxm-0/haruspex-ip-ledger` at merge commit `fe47dbcad49586ad34d4c2b211ddb4c2231f3d21`.
+- Private ledger and archive verified under creator-controlled access on 2026-08-05.
 - Complete Git bundle SHA-256: `9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd`.
 - Repository metadata snapshot SHA-256: `f85f69984052ccd812e9e21480b4a5164a7c3985907447f7119a1eb5d75d5a61`.
 

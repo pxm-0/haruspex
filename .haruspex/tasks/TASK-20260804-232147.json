@@ -2,10 +2,10 @@
   "schema_version": 1,
   "id": "TASK-20260804-232147",
   "title": "Establish Haruspex IP provenance inventory",
-  "status": "verifying",
+  "status": "ready_for_release",
   "risk": "high",
   "created_at": "2026-08-04T23:21:47Z",
-  "updated_at": "2026-08-04T23:26:10Z",
+  "updated_at": "2026-08-04T23:37:12Z",
   "problem": {
     "summary": "Haruspex has public source history but no durable chain-of-title inventory or publication gate.",
     "affected_actors": [
@@ -26,7 +26,7 @@
     "included": [
       "repository-local Haruspex task state",
       "public-safe copyright, contributor, and third-party metadata",
-      "private IP ledger under pxm-0",
+      "private IP ledger under creator-controlled access",
       "full-history Git bundle and SHA-256 evidence index",
       "deterministic inventory validation"
     ],
@@ -68,7 +68,7 @@
       "criterion": "A private ledger and hash-verified full-history archive exist under pxm-0 control.",
       "status": "passed",
       "evidence": [
-        "https://github.com/pxm-0/haruspex-ip-ledger/commit/fe47dbcad49586ad34d4c2b211ddb4c2231f3d21",
+        "external:private-ledger-merge-verified-2026-08-04",
         "external:bundle-sha256:9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd"
       ]
     },
@@ -77,7 +77,7 @@
       "criterion": "Automated checks reject missing evidence hashes, unsupported certainty, and sensitive paths.",
       "status": "passed",
       "evidence": [
-        "https://github.com/pxm-0/haruspex-ip-ledger/blob/fe47dbcad49586ad34d4c2b211ddb4c2231f3d21/scripts/validate_inventory.py",
+        "external:private-ledger-validator-at-merged-revision",
         "external:private-ledger-validator-self-test-and-SHA256SUMS-passed"
       ]
     }
@@ -338,6 +338,6 @@
   "notes": [
     "Tracking issues: #6, #7, #8, #9.",
     "This task records evidence and controls; it does not determine legal ownership.",
-    "Private ledger PR pxm-0/haruspex-ip-ledger#2 merged at fe47dbcad49586ad34d4c2b211ddb4c2231f3d21."
+    "Private ledger and archive were verified under creator-controlled access on 2026-08-05."
   ]
 }
