@@ -124,6 +124,10 @@ Require exact amounts and currency handling, idempotency, reconciliation, refund
 
 Require tenant isolation in every storage, cache, queue, search, logging, authorization, and administrative path.
 
+### `ip_provenance_sensitive`
+
+Require an identified creator and claimed owner; employment and assignment review; contributor and written-assignment records; third-party material and licence review; AI-assistance and human-contribution records; confidential-information review; publication history; release commit and artifact hashes; a deliberate licensing decision; and explicit disposition of unresolved ownership risks. Treat source-control identity as evidence of repository activity, not conclusive proof of authorship or legal ownership.
+
 ## 4. Assumption quality
 
 A useful assumption record answers:

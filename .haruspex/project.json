@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "harness_version": "0.1.0",
+  "project": {
+    "name": "haruspex",
+    "owner": "pxm-0",
+    "risk": "high"
+  },
+  "characteristics": {
+    "user_facing": false,
+    "has_api": false,
+    "has_database": false,
+    "schema_change": false,
+    "external_writes": true,
+    "uses_ai": true,
+    "handles_sensitive_data": true,
+    "destructive_operations": false,
+    "new_service": false,
+    "scheduled_or_async": false,
+    "payments_or_money": false,
+    "multi_tenant": false,
+    "ip_provenance_sensitive": true
+  },
+  "commands": {
+    "lint": null,
+    "typecheck": null,
+    "unit_test": "python3 scripts/self_test.py",
+    "integration_test": "python3 scripts/integrity_test.py",
+    "build": "python3 scripts/build_release.py --output dist",
+    "e2e": null,
+    "smoke": "python3 scripts/haruspex.py version"
+  },
+  "check_timeout_seconds": 900,
+  "paths": {
+    "prd": "docs/IP_PROVENANCE.md",
+    "architecture": "references/artifact-contracts.md",
+    "runbook": "docs/IP_PROVENANCE.md",
+    "release_plan": "docs/IP_PROVENANCE.md",
+    "handoff": "docs/IP_PROVENANCE.md"
+  }
+}

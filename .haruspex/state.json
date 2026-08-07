@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "stage": "build",
+  "status": "active",
+  "active_task": "TASK-20260804-232147",
+  "gates": {
+    "ready_to_build": {
+      "status": "passed",
+      "checked_at": "2026-08-04T23:26:10Z",
+      "blockers": [],
+      "evidence": []
+    },
+    "verification": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    },
+    "ready_to_release": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    },
+    "close": {
+      "status": "pending",
+      "checked_at": null,
+      "blockers": [],
+      "evidence": []
+    }
+  },
+  "approvals": {
+    "ready_to_build": {
+      "status": "approved",
+      "by": "user",
+      "at": "2026-08-04T23:26:06Z",
+      "note": "User explicitly approved ready-to-build in Codex chat on 2026-08-05: approve rtb"
+    },
+    "ready_to_release": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": null
+    }
+  },
+  "deployment": {
+    "status": "not_started",
+    "environment": null,
+    "commit": null,
+    "at": null,
+    "by": null,
+    "evidence": [],
+    "note": null
+  },
+  "live_validation": {
+    "status": "not_started",
+    "at": null,
+    "by": null,
+    "evidence": [],
+    "note": null
+  },
+  "last_updated_at": "2026-08-04T23:26:10Z",
+  "last_updated_by": "haruspex"
+}

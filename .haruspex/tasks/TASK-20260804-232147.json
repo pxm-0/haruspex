@@ -1,0 +1,343 @@
+{
+  "schema_version": 1,
+  "id": "TASK-20260804-232147",
+  "title": "Establish Haruspex IP provenance inventory",
+  "status": "ready_for_release",
+  "risk": "high",
+  "created_at": "2026-08-04T23:21:47Z",
+  "updated_at": "2026-08-04T23:37:12Z",
+  "problem": {
+    "summary": "Haruspex has public source history but no durable chain-of-title inventory or publication gate.",
+    "affected_actors": [
+      "creator",
+      "future counsel",
+      "future licensees or buyers"
+    ],
+    "current_behavior": "Repository history records publication but omits private creation evidence, ownership unknowns, and a pre-publication provenance review.",
+    "desired_outcome": "Preserve a verifiable private evidence inventory while publishing only substantiated, non-sensitive provenance metadata.",
+    "success_metrics": [
+      "A private ledger records known facts, evidence hashes, and explicit unknowns.",
+      "A full-history bundle is hash-verified against the public repository.",
+      "Public metadata makes no unsupported ownership or licensing claims.",
+      "Future publication is blocked when provenance review is incomplete."
+    ]
+  },
+  "scope": {
+    "included": [
+      "repository-local Haruspex task state",
+      "public-safe copyright, contributor, and third-party metadata",
+      "private IP ledger under creator-controlled access",
+      "full-history Git bundle and SHA-256 evidence index",
+      "deterministic inventory validation"
+    ],
+    "excluded": [
+      "legal ownership conclusions",
+      "employment agreement interpretation",
+      "copyright or trademark filing",
+      "storage of contracts, credentials, privileged communications, or confidential employer material in Git",
+      "open-source licensing"
+    ]
+  },
+  "constraints": [
+    "Unknown facts remain unknown and must not be inferred from Git authorship.",
+    "Sensitive records remain outside the public Haruspex repository.",
+    "No repository history is rewritten or deleted.",
+    "GitHub writes use the pxm-0 identity."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "AC-001",
+      "criterion": "Repository-local provenance controls are initialized and structurally valid.",
+      "status": "passed",
+      "evidence": [
+        "check:unit_test"
+      ]
+    },
+    {
+      "id": "AC-002",
+      "criterion": "Public metadata contains only substantiated facts and retains no-license status pending review.",
+      "status": "passed",
+      "evidence": [
+        "COPYRIGHT.md",
+        "CONTRIBUTORS.md",
+        "THIRD_PARTY_NOTICES.md"
+      ]
+    },
+    {
+      "id": "AC-003",
+      "criterion": "A private ledger and hash-verified full-history archive exist under pxm-0 control.",
+      "status": "passed",
+      "evidence": [
+        "external:private-ledger-merge-verified-2026-08-04",
+        "external:bundle-sha256:9e9e41f59de11f2bd8297aaa0b95a859445c16aad530a0717903d4b5fa29f6fd"
+      ]
+    },
+    {
+      "id": "AC-004",
+      "criterion": "Automated checks reject missing evidence hashes, unsupported certainty, and sensitive paths.",
+      "status": "passed",
+      "evidence": [
+        "external:private-ledger-validator-at-merged-revision",
+        "external:private-ledger-validator-self-test-and-SHA256SUMS-passed"
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "AS-001",
+      "statement": "GitHub and local Git metadata may be recorded as publication evidence but not proof of legal ownership.",
+      "basis": "Repository inspection and the limits of Git metadata.",
+      "impact_if_false": "The ledger could overstate chain-of-title evidence.",
+      "validation": "Label every Git-derived claim by evidence type and retain legal ownership as unknown.",
+      "owner": "pxm-0",
+      "status": "validated",
+      "blocking": false
+    },
+    {
+      "id": "AS-002",
+      "statement": "Employment, assigned-duty, contributor, and copied-material facts are not available in this workspace.",
+      "basis": "Repository and attachment inspection found no underlying contracts or private evidence.",
+      "impact_if_false": "Available evidence could be omitted from the first ledger snapshot.",
+      "validation": "Record the fields as unknown with an owner and follow-up rather than asserting a favorable answer.",
+      "owner": "pxm-0 and counsel",
+      "status": "accepted_risk",
+      "resolution": "For this implementation, unavailable legal facts are recorded as unknown and explicitly excluded from ownership claims; counsel review remains a follow-up.",
+      "blocking": false
+    }
+  ],
+  "open_questions": [],
+  "dependencies": [
+    "GitHub account pxm-0",
+    "future access to contracts and independently controlled backup storage"
+  ],
+  "failure_modes": [
+    {
+      "scenario": "Sensitive legal or employment information is published in the public repository.",
+      "consequence": "Privacy, privilege, or dispute-position harm.",
+      "detection": "Public-path allowlist and content review.",
+      "mitigation": "Store only references and hashes in the private ledger; never store underlying sensitive files in Git."
+    },
+    {
+      "scenario": "Git identity is presented as conclusive proof of authorship or ownership.",
+      "consequence": "False chain-of-title representation.",
+      "detection": "Unknown-field validation and counsel-blocker review.",
+      "mitigation": "Separate observed facts from claimed ownership and legal conclusions."
+    },
+    {
+      "scenario": "The only archive is lost or changed.",
+      "consequence": "Evidence cannot be reproduced.",
+      "detection": "Bundle verification and SHA-256 comparison.",
+      "mitigation": "Create a full-history bundle and retain a two-location backup follow-up."
+    }
+  ],
+  "review_coverage": {
+    "core": {
+      "product": {
+        "status": "complete",
+        "rationale": "Outcome is evidence preservation, not a title determination.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "behavior_ux": {
+        "status": "complete",
+        "rationale": "Primary paths are inventory creation, validation failure, and recovery from missing evidence.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "data_state": {
+        "status": "complete",
+        "rationale": "Known, unknown, evidence, and hash states are explicit and append-only.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "security_privacy": {
+        "status": "complete",
+        "rationale": "Public/private separation and a sensitive-content denylist are required.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "reliability": {
+        "status": "complete",
+        "rationale": "Archive verification and reproducible hashes cover corruption and drift.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "operations": {
+        "status": "complete",
+        "rationale": "The ledger includes review dates, owners, and follow-ups.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "performance_cost": {
+        "status": "complete",
+        "rationale": "Small repository and standard-library validation have negligible cost.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "delivery_release": {
+        "status": "complete",
+        "rationale": "Draft PR, issues, private ledger, archive, and pre-publication checks define delivery.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "maintainability": {
+        "status": "complete",
+        "rationale": "Flat YAML records and one validator avoid a new service or dependency.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      }
+    },
+    "profiles": {
+      "external_writes": {
+        "status": "complete",
+        "rationale": "GitHub writes are scoped to pxm-0 and verified before mutation.",
+        "evidence": [
+          "gh auth status --active"
+        ]
+      },
+      "uses_ai": {
+        "status": "complete",
+        "rationale": "AI assistance is recorded as unknown in detail and never treated as human authorship proof.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "handles_sensitive_data": {
+        "status": "complete",
+        "rationale": "Underlying sensitive documents are excluded from Git; only hashes and references are allowed.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "ip_provenance_sensitive": {
+        "status": "complete",
+        "rationale": "Publication requires creator, contributor, third-party, AI, confidentiality, licensing, and evidence review.",
+        "evidence": [
+          "docs/IP_PROVENANCE.md"
+        ]
+      },
+      "user_facing": {
+        "status": "not_activated",
+        "rationale": "No runtime user interface is changed.",
+        "evidence": []
+      },
+      "has_api": {
+        "status": "not_activated",
+        "rationale": "No API is added.",
+        "evidence": []
+      },
+      "has_database": {
+        "status": "not_activated",
+        "rationale": "The inventory is file-backed.",
+        "evidence": []
+      },
+      "schema_change": {
+        "status": "not_activated",
+        "rationale": "No production schema exists.",
+        "evidence": []
+      },
+      "destructive_operations": {
+        "status": "not_activated",
+        "rationale": "History and evidence deletion are excluded.",
+        "evidence": []
+      },
+      "new_service": {
+        "status": "not_activated",
+        "rationale": "No service is added.",
+        "evidence": []
+      },
+      "scheduled_or_async": {
+        "status": "not_activated",
+        "rationale": "No scheduled or asynchronous runtime is added.",
+        "evidence": []
+      },
+      "payments_or_money": {
+        "status": "not_activated",
+        "rationale": "No payments are involved.",
+        "evidence": []
+      },
+      "multi_tenant": {
+        "status": "not_activated",
+        "rationale": "No multi-tenant runtime is involved.",
+        "evidence": []
+      }
+    }
+  },
+  "test_plan": {
+    "unit": [
+      "Run the existing Haruspex self-test."
+    ],
+    "integration": [
+      "Run evidence-integrity regression tests.",
+      "Validate private ledger records and archive hashes."
+    ],
+    "e2e": [
+      "Clone the private ledger and verify the referenced Haruspex bundle."
+    ],
+    "manual": [
+      "Confirm public files contain no contract text, credentials, privileged communications, or unsupported ownership claim."
+    ],
+    "negative_and_recovery": [
+      "Reject missing hashes, invalid status values, and forbidden sensitive paths.",
+      "Keep legal conclusions unknown when source evidence is absent."
+    ]
+  },
+  "required_checks": [
+    "unit_test",
+    "integration_test",
+    "build"
+  ],
+  "release_plan": {
+    "deployment_steps": [
+      "Push feature branch and private ledger branch.",
+      "Keep public PR in draft until checks and human review pass."
+    ],
+    "rollback_steps": [
+      "Close the draft PR without merge; retain private evidence and Git history."
+    ],
+    "smoke_tests": [
+      "Run Haruspex version and ledger validator."
+    ],
+    "monitoring": [
+      "Review ledger after material contribution, disclosure, assignment, or release."
+    ],
+    "configuration": [
+      "GitHub identity must be pxm-0."
+    ],
+    "migration": [
+      "None."
+    ],
+    "ownership": [
+      "pxm-0 maintains records; counsel determines legal conclusions."
+    ]
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "Codex independent verification pass",
+    "at": "2026-08-04T23:32:50Z",
+    "findings": [],
+    "waiver_reason": null
+  },
+  "known_issues": [
+    "Legal ownership and employment boundary remain unresolved pending private evidence and counsel review.",
+    "A second independently controlled backup cannot be verified from this workspace."
+  ],
+  "follow_ups": [
+    "Review employment and invention-assignment documents with Philippine IP/employment counsel.",
+    "Copy the verified archive to a second independently controlled encrypted location."
+  ],
+  "notes": [
+    "Tracking issues: #6, #7, #8, #9.",
+    "This task records evidence and controls; it does not determine legal ownership.",
+    "Private ledger and archive were verified under creator-controlled access on 2026-08-05."
+  ]
+}

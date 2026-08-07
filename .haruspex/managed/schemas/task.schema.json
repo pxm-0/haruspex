@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://haruspex.local/schemas/task.schema.json",
+  "title": "Haruspex task",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "status",
+    "risk",
+    "problem",
+    "scope",
+    "acceptance_criteria",
+    "assumptions",
+    "open_questions",
+    "review_coverage",
+    "test_plan",
+    "required_checks",
+    "release_plan",
+    "independent_review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "ready",
+        "in_progress",
+        "verifying",
+        "ready_for_release",
+        "deployed",
+        "completed",
+        "blocked",
+        "cancelled"
+      ]
+    },
+    "risk": {
+      "enum": [
+        "unclassified",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "problem": {
+      "type": "object"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "minItems": 1
+    },
+    "assumptions": {
+      "type": "array"
+    },
+    "open_questions": {
+      "type": "array"
+    },
+    "review_coverage": {
+      "type": "object"
+    },
+    "test_plan": {
+      "type": "object"
+    },
+    "required_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "release_plan": {
+      "type": "object"
+    },
+    "independent_review": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}
